@@ -1,0 +1,11 @@
+agno>=2.3.4
+ragas[all]>=0.3.9
+
+# llms
+openai>=2.8.1
+anthropic>=0.75.0
+google-genai>=1.52.0
+ollama>=0.6.1
+
+pandas>=2.3.3
+python-dotenv>=1.2.1
