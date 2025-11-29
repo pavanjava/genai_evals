@@ -1,8 +1,11 @@
 import os
-
+import asyncio
 from openai import OpenAI
 from anthropic import Anthropic
 from dotenv import load_dotenv, find_dotenv
+from ollama import AsyncClient
+from google import genai
+from google.genai import types
 
 load_dotenv(find_dotenv())
 
@@ -41,4 +44,24 @@ def trigger_claude(prompt: str):
             {"role": "user", "content": prompt}
         ]
     )
-    print(message.content)
+    return message.content
+
+def trigger_gemini(prompt: str):
+
+    client = genai.Client()
+
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        config=types.GenerateContentConfig(
+            system_instruction=SYSTEM_PROMPT),
+        contents=prompt
+    )
+    return response.text
+
+
+async def trigger_local_llm(prompt: str):
+    messages = [{"role": "system", "content": SYSTEM_PROMPT},{'role': 'user', 'content': prompt}]
+    response = await AsyncClient().chat(model='granite3.2-vision:latest', messages=messages)
+    return response['message']['content']
+
+print(trigger_gemini('Why is the sky blue?'))
