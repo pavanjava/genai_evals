@@ -25,7 +25,7 @@ async def run_experiment(row):
     return experiment_view
 
 async def main():
-    dataset = Dataset.load(name="test_dataset", backend="local/csv", root_dir=".")
+    dataset = Dataset.load(name="prompt_eval_dataset", backend="local/csv", root_dir=".")
     experiment_results = await run_experiment.arun(dataset)
     print("Experiment completed successfully!")
     print("Experiment results:", experiment_results)

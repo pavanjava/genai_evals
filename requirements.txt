@@ -9,3 +9,5 @@ ollama>=0.6.1
 
 pandas>=2.3.3
 python-dotenv>=1.2.1
+protobuf>=6.33.1
+pydantic>=2.12.5
