@@ -48,6 +48,32 @@ def create_math_dataset():
     # make sure to save it
     dataset.save()
 
+def create_email_dataset():
+    samples = [
+        {
+            "email": "Hello, I paid for the Premium subscription on November 25th using my credit card ending in 7834. The payment of $49.99 was deducted successfully (transaction ID: PAY-20241125-4521), but my account portal still shows 'Free Plan' status. It's been 3 days now and I need access to premium features urgently for my project.",
+            "pass_criteria": "category Subscription Issue; plan_type Premium; payment_date Nov 25th; amount 49.99; transaction_id PAY-20241125-4521; card_last_digits 7834; current_status Free Plan; response confirms payment and activates subscription"
+        },
+        {
+            "email": "Hi Support Team, I cancelled my annual subscription last week on November 22nd (cancellation request #CXL-8834). According to your refund policy, I should receive my prorated refund within 5-7 business days. It's been 8 days now and I haven't received any update or credit to my account. The original charge was $299.00. Can you please check the status of my refund?",
+            "pass_criteria": "category Refund Inquiry; cancellation_date Nov 22nd; cancellation_id CXL-8834; original_amount 299.00; days_elapsed 8; expected_timeline 5-7 business days; response provides refund status and timeline"
+        },
+        {
+            "email": "This is extremely frustrating! My internet has been down since November 26th, and despite logging THREE complaints (ticket numbers: TKT-11234, TKT-11267, TKT-11289), NO field engineer has showed up. I work from home and this is causing serious issues with my job. Each time I call, I'm told someone will come within 24 hours, but it's been 4 days now. My customer ID is CUST-99887. I need immediate resolution or I want to terminate my service with full refund.",
+            "pass_criteria": "category Service Complaint; issue_type internet outage; outage_start_date Nov 26th; ticket_numbers TKT-11234, TKT-11267, TKT-11289; complaint_count 3; customer_id CUST-99887; days_without_service 4; response escalates to priority and schedules engineer visit"
+        }
+    ]
+    # Create a new dataset
+    dataset = Dataset(name="workflow_eval_dataset", backend="local/csv", root_dir=".")
+
+    # Add a sample to the dataset
+    for sample in samples:
+        dataset.append(sample)
+
+    # make sure to save it
+    dataset.save()
+
 if __name__ == "__main__":
     create_sentiment_dataset()
     create_math_dataset()
+    create_email_dataset()
