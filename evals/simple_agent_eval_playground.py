@@ -1,7 +1,7 @@
 from ragas.metrics import numeric_metric
 from ragas.metrics.result import MetricResult
 from ragas import experiment, Dataset
-from agents import math_agent, MathResponse
+from ai.agents import math_agent
 
 
 @numeric_metric(name="correctness")
@@ -37,7 +37,7 @@ async def run_experiment(row):
 
 
 async def main():
-    dataset = Dataset.load(name="agent_eval_dataset", backend="local/csv", root_dir=".")
+    dataset = Dataset.load(name="agent_eval_dataset", backend="local/csv", root_dir="..")
     experiment_results = await run_experiment.arun(dataset)
     print("Experiment completed successfully!")
     print("Experiment results:", experiment_results)
