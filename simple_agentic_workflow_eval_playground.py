@@ -20,7 +20,33 @@ email_content_extractor_agent = Agent(
     name="email content extractor agent",
     model=OpenAIChat(id="gpt-4o"),
     role="",
-    instructions=dedent(f"""\ """)
+    instructions=dedent(f"""
+        Scenario-1
+        Extract the following information from the given subscription email:
+        - transaction_number: The transaction number (e.g., "PAY-2024-001")
+        - amount: The total amount mentioned (without $ or ₹ sign, e.g., "299.99")
+            
+        Respond with valid JSON only, like:
+        {{"transaction_number": "PAY-2024-001", "amount": "299.99"}}
+        
+        Scenario-2:
+        Extract the following information from the given subscription email:
+        - transaction_number: The transaction number (e.g., "PAY-2024-001")
+        - amount: The total amount mentioned (without $ or ₹ sign, e.g., "299.99")
+            
+        Respond with valid JSON only, like:
+        {{"transaction_number": "PAY-2024-001", "amount": "299.99"}}
+        
+        Scenario-3:
+        Extract the following information from the given subscription email:
+        - transaction_number: The transaction number (e.g., "PAY-2024-001")
+        - amount: The total amount mentioned (without $ or ₹ sign, e.g., "299.99")
+            
+        Respond with valid JSON only, like:
+        {{"transaction_number": "PAY-2024-001", "amount": "299.99"}}
+        
+        If a field is not found, use null.
+        """)
 )
 
 email_response_generation_agent = Agent(
